@@ -5,21 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Happy Birthday Pingu ❤️</title>
   <style>
-    /* -----------------------------------
-       COOLER, MAGICAL STYLES (Existing)
-    --------------------------------------*/
     body {
       margin: 0;
       padding: 0;
       font-family: 'Poppins', sans-serif;
-      /* Updated gradient start color: #3f0c6a */
       background: linear-gradient(135deg, #3f0c6a 0%, #4b0078 100%); 
       text-align: center;
       color: #fff;
-      overflow-x: hidden; /* Prevent horizontal scrollbar */
+      overflow-x: hidden;
       min-height: 100vh;
       position: relative;
-      /* FIX: Ensures the page is scrollable */
     }
     
     body::before {
@@ -48,13 +43,13 @@
     .container {
       padding: 50px 20px;
       position: relative; 
-      z-index: 1; /* Keep content above particles and hearts */
+      z-index: 1;
     }
     h1 {
       font-size: clamp(2.5rem, 6vw, 4rem); 
       margin-bottom: 25px;
       text-shadow: 0 0 15px #e34cff;
-      line-height: 1.2; /* Adjust for multiline title if needed */
+      line-height: 1.2;
     }
     p {
       font-size: clamp(1rem, 2vw, 1.2rem);
@@ -74,11 +69,10 @@
         0 8px 30px rgba(0,0,0,0.5),
         inset 0 0 15px rgba(255, 255, 255, 0.1); 
 
-      /* Animation for card fade-in */
       opacity: 0;
       transform: translateY(20px);
       animation: fadeInCard 1.5s ease-out forwards;
-      animation-delay: 0.5s; /* Delay for a smoother intro */
+      animation-delay: 0.5s;
     }
 
     @keyframes fadeInCard {
@@ -97,7 +91,6 @@
       box-shadow: 0 0 10px rgba(255, 192, 203, 0.3);
     }
     
-    /* Style for the live counter text */
     #live-time-counter {
         display: block;
         margin-top: 15px;
@@ -107,55 +100,47 @@
         color: #ffc0cb; 
         text-shadow: 0 0 15px #ffc0cb; 
         letter-spacing: 0.5px;
-        /* Heartbeat animation for "since us ❤️" */
         animation: heartbeat 1.5s infinite alternate ease-in-out;
     }
 
-    /* Heartbeat Animation Keyframes */
     @keyframes heartbeat {
         0% { transform: scale(1); }
         50% { transform: scale(1.05); }
         100% { transform: scale(1); }
     }
 
-    /* Heartbeat for Pingu in the title */
     h1 .pingu-heartbeat {
-        display: inline-block; /* Essential for transform on inline elements */
+        display: inline-block;
         animation: heartbeat 1.8s infinite alternate ease-in-out;
-        transform-origin: center center; /* Ensure it scales from its center */
+        transform-origin: center center;
     }
 
-    /* -----------------------------------
-       FLOATING HEARTS ANIMATION
-    --------------------------------------*/
     .heart-container {
         position: fixed;
         bottom: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        pointer-events: none; /* Allows clicks to pass through */
-        z-index: 0; /* Below the main content */
+        pointer-events: none;
+        z-index: 0;
     }
 
     .heart {
         position: absolute;
-        bottom: -20px; /* Start below the screen */
+        bottom: -20px;
         font-size: 20px;
-        color: #ff69b4; /* Hot pink */
+        color: #ff69b4;
         opacity: 0;
         animation: floatUp 8s ease-in-out infinite;
-        transform: translateX(0) rotate(0deg); /* Initial state */
+        transform: translateX(0) rotate(0deg);
         filter: drop-shadow(0 0 5px rgba(255,105,180,0.5));
     }
 
-    /* Define different animation delays and durations for variety */
     .heart:nth-child(2n) { animation-duration: 9s; animation-delay: 1s; color: #ffc0cb; }
     .heart:nth-child(3n) { animation-duration: 7s; animation-delay: 2s; font-size: 25px; color: #e34cff; }
     .heart:nth-child(4n) { animation-duration: 10s; animation-delay: 0.5s; opacity: 0.7; }
     .heart:nth-child(5n) { animation-duration: 6s; animation-delay: 3s; font-size: 18px; color: #ff9a9e; }
     .heart:nth-child(7n) { animation-duration: 8.5s; animation-delay: 1.5s; opacity: 0.6; }
-
 
     @keyframes floatUp {
         0% {
@@ -182,7 +167,6 @@
         }
     }
 
-    /* Responsive adjustments for smaller screens */
     @media (max-width: 600px) {
         .card {
             padding: 25px 15px;
@@ -195,16 +179,21 @@
         }
     }
   </style>
-  <!-- Load Poppins font for better aesthetic --><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="heart-container" id="heart-container"></div> <!-- Container for floating hearts --><div class="container">
+  <div class="heart-container" id="heart-container"></div>
+
+  <div class="container">
     <div class="card">
       <h1>🎉 Happy Birthday My <span class="pingu-heartbeat">Pingu</span> ❤️🎉</h1>
 
       <p>
 Jaanu, it's been <strong id="live-time-counter">...calculating time...</strong> just falling harder for you with each passing day.
 
+It’s your 4th birthday with me. I’ve seen how my baby has gone from 17 to 20. Girl, I’m really proud of you, and I’ll always be your biggest fan. I probably never expressed how much I admire the efforts and hard work you put into your work, but I genuinely admire it. Your guide is truly and completely your biggest well-wisher and fanboy.
+From besties to my world… things have changed so muchhh. I will always be there for you through every thick and thin, I promise. No matter how hard things get, I know you will get through it. Hamesha hi hoon tere sang.
 
 From besties to my entire world… things have changed so much. And I’ll always be there for you — through every thick and thin. No matter how hard things get, I know you'll make it through. Hamesha hoon tere sang.
 
@@ -231,10 +220,10 @@ Bas 2 years aur babe, phir pura duniya ghumna hai tere saath. I’ll love you mo
 
       <p>
 I got you a new lil friend… hug him whenever you miss me. He’s very excited to meet you.
-I really hope you love the gift .... happy 20 sweetheart
+I really hope you love the gift... happy 20, sweetheart.
 <strong>I LOVE YOU SOOO MUCHHH PINGUUU ❤️</strong>
 
-Yours and only yours,
+Yours and only yours,<br>
 Kuddu
       </p>
       
@@ -272,40 +261,33 @@ Kuddu
     setInterval(updateTimer, 1000);
 
 
-    // --- Floating Hearts Logic ---
     const heartContainer = document.getElementById('heart-container');
-    const numHearts = 30; // Number of hearts to generate
+    const numHearts = 30;
 
     function createHeart() {
         const heart = document.createElement('div');
         heart.classList.add('heart');
-        heart.innerHTML = '❤️'; // Unicode heart character
+        heart.innerHTML = '❤️';
         
-        // Randomize starting position (horizontal)
         const startX = Math.random() * 100 + 'vw';
         heart.style.left = startX;
         
-        // Randomize size slightly
-        const randomSize = Math.random() * 10 + 15; // 15px to 25px
+        const randomSize = Math.random() * 10 + 15;
         heart.style.fontSize = randomSize + 'px';
 
-        // Randomize animation delay and duration for variation
-        heart.style.animationDelay = Math.random() * 5 + 's'; // 0 to 5s delay
-        heart.style.animationDuration = Math.random() * 5 + 7 + 's'; // 7 to 12s duration
+        heart.style.animationDelay = Math.random() * 5 + 's';
+        heart.style.animationDuration = Math.random() * 5 + 7 + 's';
 
         heartContainer.appendChild(heart);
 
-        // Remove heart after it floats off screen to prevent accumulation
         heart.addEventListener('animationend', () => {
             heart.remove();
-            // Create a new heart to maintain the count
-            setTimeout(createHeart, Math.random() * 1000); // Stagger creation
+            setTimeout(createHeart, Math.random() * 1000);
         });
     }
 
-    // Generate initial hearts
     for (let i = 0; i < numHearts; i++) {
-        setTimeout(createHeart, Math.random() * 3000); // Stagger initial heart creation
+        setTimeout(createHeart, Math.random() * 3000);
     }
 
   </script>
