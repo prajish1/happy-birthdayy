@@ -1,297 +1,377 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Happy Birthday Pingu ❤️</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js" defer></script>
+
   <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #3f0c6a 0%, #4b0078 100%); 
-      text-align: center;
-      color: #fff;
-      overflow-x: hidden;
-      min-height: 100vh;
-      position: relative;
-    }
-    
-    body::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: transparent;
-      box-shadow: 
-        10px 10px 1px #fff, 200px 300px 1px #fff, -50px 700px 1px #fff,
-        400px 100px 1px #fff, -300px -100px 1px #fff,
-        150px 800px 1px #fff, 600px 200px 1px #fff, -200px 400px 1px #fff,
-        750px 500px 1px #fff, -100px 100px 1px #fff,
-        300px 900px 1px #fff, 900px 600px 1px #fff, -400px 250px 1px #fff;
-      animation: twinkle 150s linear infinite;
-      opacity: 0.15;
+    :root{
+      --gradient-start:#5a3e8a;
+      --gradient-end:#3d2463;
+      --accent-primary:#d8b4fe;
+      --accent-secondary:#e879f9;
+      --accent-light:#f3e8ff;
+      --accent-rose:#faf5ff;
+      --card-bg: rgba(139,92,246,0.25);
+      --card-border: rgba(216,180,254,0.4);
+      --message-bg: rgba(255,255,255,0.03);
     }
 
-    @keyframes twinkle {
-      0% { transform: translate(0, 0); }
-      100% { transform: translate(-200px, -200px); }
+    html,body{margin:0;padding:0;height:100%}
+    body{
+      font-family:'Poppins', sans-serif;
+      background:linear-gradient(135deg,var(--gradient-start),var(--gradient-end));
+      color:var(--accent-rose);
+      overflow-x:hidden;
+      text-align:center;
+      min-height:100vh;
     }
 
-    .container {
-      padding: 50px 20px;
-      position: relative; 
-      z-index: 1;
-    }
-    h1 {
-      font-size: clamp(2.5rem, 6vw, 4rem); 
-      margin-bottom: 25px;
-      text-shadow: 0 0 15px #e34cff;
-      line-height: 1.2;
-    }
-    p {
-      font-size: clamp(1rem, 2vw, 1.2rem);
-      line-height: 1.8;
-      white-space: pre-line;
-      text-shadow: 0 0 5px rgba(0,0,0,0.2);
-    }
-    .card {
-      background: rgba(255, 255, 255, 0.05); 
-      border: 1px solid rgba(255, 255, 255, 0.2); 
-      padding: 40px 30px;
-      border-radius: 20px;
-      backdrop-filter: blur(20px); 
-      max-width: 700px;
-      margin: 20px auto;
-      box-shadow: 
-        0 8px 30px rgba(0,0,0,0.5),
-        inset 0 0 15px rgba(255, 255, 255, 0.1); 
-
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeInCard 1.5s ease-out forwards;
-      animation-delay: 0.5s;
+    .container{
+      max-width:1100px;
+      margin:0 auto;
+      padding:50px 20px;
+      position:relative;
+      z-index:10;
     }
 
-    @keyframes fadeInCard {
-        to { opacity: 1; transform: translateY(0); }
+    .card{
+      max-width:760px;
+      margin:20px auto;
+      background:var(--card-bg);
+      border:2px solid var(--card-border);
+      border-radius:30px;
+      padding:50px 40px;
+      backdrop-filter:blur(16px);
+      box-shadow:0 8px 32px rgba(216,180,254,0.25);
+      animation:fadein 1s ease-out forwards;
+      opacity:0;
+      transform:translateY(20px);
+    }
+    @keyframes fadein{
+      to{opacity:1;transform:none}
     }
 
-    .poem {
-      margin-top: 30px;
-      padding: 25px;
-      background: rgba(255, 255, 255, 0.1); 
-      border-radius: 15px;
-      font-size: clamp(1.2rem, 2.5vw, 1.4rem);
-      font-style: italic;
-      white-space: pre-line;
-      border-left: 5px solid #ffc0cb; 
-      box-shadow: 0 0 10px rgba(255, 192, 203, 0.3);
+    h1{
+      font-weight:800;
+      font-size:clamp(2.4rem, 6vw, 3.5rem);
+      margin:0;
+      animation:bob 3s ease-in-out infinite;
     }
-    
-    #live-time-counter {
-        display: block;
-        margin-top: 15px;
-        margin-bottom: 15px;
-        font-size: clamp(1.3rem, 3vw, 1.8rem);
-        font-weight: 700;
-        color: #ffc0cb; 
-        text-shadow: 0 0 15px #ffc0cb; 
-        letter-spacing: 0.5px;
-        animation: heartbeat 1.5s infinite alternate ease-in-out;
+    @keyframes bob{
+      0%,100%{transform:translateY(0)}
+      50%{transform:translateY(-6px)}
     }
 
-    @keyframes heartbeat {
-        0% { transform: scale(1); }
-        50% { transform: scale(1.05); }
-        100% { transform: scale(1); }
+    .glowing-text{
+      color:var(--accent-primary);
+      text-shadow:0 0 10px white,0 0 25px var(--accent-primary);
     }
 
-    h1 .pingu-heartbeat {
-        display: inline-block;
-        animation: heartbeat 1.8s infinite alternate ease-in-out;
-        transform-origin: center center;
+    #live-time-counter{
+      margin-top:16px;
+      font-size:1.2rem;
+      font-weight:700;
+      color:var(--accent-primary);
     }
 
-    .heart-container {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-        z-index: 0;
+    .message-header{
+      display:inline-block;
+      padding:12px 26px;
+      margin:20px auto 8px;
+      border-radius:22px;
+      background:rgba(255,255,255,0.06);
+      font-weight:700;
+      font-size:1.1rem;
+      box-shadow:0 0 16px rgba(255,255,255,0.25);
+      animation:headerpulse 2.5s infinite;
+    }
+    @keyframes headerpulse{
+      0%,100%{transform:scale(1)}
+      50%{transform:scale(1.05)}
     }
 
-    .heart {
-        position: absolute;
-        bottom: -20px;
-        font-size: 20px;
-        color: #ff69b4;
-        opacity: 0;
-        animation: floatUp 8s ease-in-out infinite;
-        transform: translateX(0) rotate(0deg);
-        filter: drop-shadow(0 0 5px rgba(255,105,180,0.5));
+    .message-box{
+      background:var(--message-bg);
+      border-radius:14px;
+      padding:22px;
+      text-align:left;
+      line-height:1.7;
+      font-size:1.03rem;
+      box-shadow:0 6px 16px rgba(0,0,0,0.25);
+      margin-bottom:16px;
     }
 
-    .heart:nth-child(2n) { animation-duration: 9s; animation-delay: 1s; color: #ffc0cb; }
-    .heart:nth-child(3n) { animation-duration: 7s; animation-delay: 2s; font-size: 25px; color: #e34cff; }
-    .heart:nth-child(4n) { animation-duration: 10s; animation-delay: 0.5s; opacity: 0.7; }
-    .heart:nth-child(5n) { animation-duration: 6s; animation-delay: 3s; font-size: 18px; color: #ff9a9e; }
-    .heart:nth-child(7n) { animation-duration: 8.5s; animation-delay: 1.5s; opacity: 0.6; }
-
-    @keyframes floatUp {
-        0% {
-            transform: translateY(0) translateX(0) rotate(0deg);
-            opacity: 0;
-        }
-        20% {
-            opacity: 0.8;
-            transform: translateY(-20%) translateX(10px) rotate(5deg);
-        }
-        40% {
-            transform: translateY(-40%) translateX(-10px) rotate(-5deg);
-        }
-        60% {
-            transform: translateY(-60%) translateX(15px) rotate(8deg);
-        }
-        80% {
-            opacity: 0.8;
-            transform: translateY(-80%) translateX(-15px) rotate(-8deg);
-        }
-        100% {
-            transform: translateY(-100vh) translateX(0) rotate(0deg);
-            opacity: 0;
-        }
+    .poem{
+      background:rgba(216,180,254,0.14);
+      padding:26px;
+      border-left:6px solid var(--accent-primary);
+      border-radius:18px;
+      margin-top:26px;
+      text-align:left;
+      line-height:1.8;
+      white-space:pre-line;
     }
 
-    @media (max-width: 600px) {
-        .card {
-            padding: 25px 15px;
-        }
-        h1 {
-            font-size: clamp(2rem, 8vw, 3rem);
-        }
-        p, .poem {
-            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
-        }
+    .memory-box-button{
+      margin-top:18px;
+      background:linear-gradient(135deg,var(--accent-primary),var(--accent-secondary));
+      padding:16px 34px;
+      border:none;
+      border-radius:30px;
+      font-weight:700;
+      animation:tap 2s infinite;
+      cursor:pointer;
     }
+    @keyframes tap{
+      0%,100%{transform:scale(1)}
+      50%{transform:scale(1.06)}
+    }
+
+    .memory-box-content{
+      margin-top:20px;
+      background:rgba(216,180,254,0.14);
+      padding:20px;
+      border-radius:18px;
+      display:none;
+      text-align:left;
+    }
+    .memory-box-content.active{
+      display:block;
+    }
+
+    /* Removed glow fully */
+    .memory-thumb{
+      width:140px;
+      height:92px;
+      object-fit:cover;
+      margin-top:12px;
+      border-radius:14px;
+
+      /* still has soft border */
+      border:3px solid #9e0c6b;
+
+      /* faint background */
+      background:#fff2fa;
+
+      /* NO GLOW */
+      box-shadow:none;
+    }
+
+    #scroll-arrow{
+      position:fixed;
+      bottom:22px;
+      left:50%;
+      transform:translateX(-50%);
+      font-size:2.4rem;
+      color:var(--accent-primary);
+      animation:arrow 1.8s infinite;
+      text-shadow:0 0 10px white;
+      cursor:pointer;
+      z-index:20;
+      transition:opacity .4s;
+    }
+    @keyframes arrow{
+      0%,100%{transform:translateX(-50%) translateY(0)}
+      50%{transform:translateX(-50%) translateY(-10px)}
+    }
+
+    .footer{
+      text-align:center;
+      margin-top:30px;
+      font-size:0.9rem;
+      opacity:0;
+      animation:footerfade 2s ease-in forwards;
+      animation-delay:1.2s;
+      color:#ffb7e6;
+      text-shadow:0 0 10px rgba(255,150,220,0.6);
+    }
+    @keyframes footerfade{ to{opacity:1} }
   </style>
 
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
-  <div class="heart-container" id="heart-container"></div>
 
-  <div class="container">
-    <div class="card">
-      <h1>🎉 Happy Birthday My <span class="pingu-heartbeat">Pingu</span> ❤️🎉</h1>
+<div id="scroll-arrow">↓</div>
 
-      <p>
-Jaanu, it's been <strong id="live-time-counter">...calculating time...</strong> just falling harder for you with each passing day.
+<div class="container">
+  <div class="card">
 
-It’s your 4th birthday with me. I’ve seen how my baby has gone from 17 to 20. Girl, I’m really proud of you, and I’ll always be your biggest fan. I probably never expressed how much I admire the efforts and hard work you put into your work, but I genuinely admire it. Your guide is truly and completely your biggest well-wisher and fanboy.
-        
-From besties to my entire world… things have changed so much. And I’ll always be there for you — through every thick and thin. No matter how hard things get, I know you'll make it through. Hamesha hoon tere sang.
+    <h1>🎉 Happy Birthday My <span class="glowing-text">Pingu ❤️</span> 🎉</h1>
 
-I know things are tough here and you don’t always feel good… but I'm always just a call away. I would do anything in the world to see that smile of yours.
+    <div id="live-time-counter">...</div>
 
-Bas 2 saal aur babe, phir pura duniya ghumna hai tere saath. I’ll love you more than Krish ever loved Vaani. Always.
-      </p>
+    <div class="message-header">💖 A Birthday Message for my baby, My World 💖</div>
 
-      <div class="poem">
-तुम्हारी इन आँखों से सारे
+    <div class="message-box">
+Jaanu, it’s been… just me falling harder for you with every single day.
+<br>
+It’s your 4th birthday with me, and I’ve seen my baby go from 17 to 20. Girl, I’m really, really proud of you — and I will always be your biggest fan. I know I don’t say it often, but I truly admire the effort and hard work you put into everything you do. Your guide is honestly your biggest supporter and fanboy.
+<br><p>
+From besties to my whole world… things have changed so muchhh. And I promise I will always be there for you — through every thick and thin. No matter how hard things get, I know you’ll get through it… hamesha hi hoon tere sang.
+<br><p>
+I know things are tough there and you don’t always feel good… but I promise I’m always just a call away. I’d do anything in the world just to see that smile of yours.
+<br><p>
+Bas 2 saal aur babe… phir pura duniya ghumna hai tere saath.  
+<br><p>
+I’ll love you more than Krish ever loved Vaani… always. ❤️
+
+
+    <div class="poem">
+तुम्हारी इन आँखों से सारे  
 आँखों से सारे ले लूँ अँधेरे तेरे
 
-मेरी जान, अभी बाँटेंगे मिल के
+मेरी जान, अभी बाँटेंगे मिल के  
 मिलकर बाँटेंगे सारे सवेरें मेरे
 
-तुम हो तो धूप है मद्धम
+तुम हो तो धूप है मद्धम  
 तुम हो तो छाँव है हर दम
 
-तुम हो तो हक़ में है
+तुम हो तो हक़ में है  
 मेरे आते-जाते ये मौसम
 
 तुम हो तो सब अच्छा है
-      </div>
+    </div>
+
+    <p style="margin-top:18px;">
+      I got you a new lil friend… hug him whenever you miss me.  
+      Happy 20, sweetheart.  
+      <strong>I LOVE YOU SOOO MUCHHH PINGUUU ❤️</strong><br><br>
+      Yours and only yours,<br> Kuddu
+    </p>
+
+    <button class="memory-box-button" id="memoryBtn">Open Our Memory Box 🎁</button>
+
+    <div class="memory-box-content" id="memoryContent">
+      <h3>❤️ Our Favourite Memory Forever ❤️</h3>
 
       <p>
-I got you a new lil friend… hug him whenever you miss me. He’s very excited to meet you.
-I really hope you love the gift... happy 20, sweetheart.
-<strong>I LOVE YOU SOOO MUCHHH PINGUUU ❤️</strong>
+Jaanu, that movie date will forever remain my favourite memory of us... Saiyaara forever will be etched in my heart...
 
-Yours and only yours,<br>
-Kuddu
+Yaar, holding hands and watching a romantic movie with you was the most special feeling ever... I felt my heartbeat every passing second in the movie. I kept looking for your hand during every romantic scene. I wasn’t seeing Krish and Vaani — I was seeing us.
+
+Ugh, the urge to recreate those cuteeee scenes w youuu...
+
+Jaaanu, jaldiiii shaadi karleeee... I wanna cuddlee youuu allll dayyyyyyy...
       </p>
-      
+
+      <h4>🎶 The Sweetest Sound 🎶</h4>
+      <p>
+The songs remind mee of youuu every single time.  
+And when I hear them in your payara voiceee… baby, it just melts me.  
+You recorded the song just for me — that means everything to me.  
+      </p>
+
+      <p style="font-weight:700;">07/01/2024 → forever ❤️</p>
     </div>
+
   </div>
 
-  <script>
-    const startDate = new Date('2024-01-07T00:00:00');
-
-    function updateTimer() {
-      const now = new Date();
-      let diff = now - startDate;
-
-      if (diff < 0) diff = 0;
-
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      diff -= days * (1000 * 60 * 60 * 24);
-
-      const hours = Math.floor(diff / (1000 * 60 * 60));
-      diff -= hours * (1000 * 60 * 60);
-
-      const minutes = Math.floor(diff / (1000 * 60));
-      diff -= minutes * (1000 * 60);
-
-      const seconds = Math.floor(diff / 1000);
-
-      const counterElement = document.getElementById('live-time-counter');
-      if (counterElement) {
-          counterElement.innerHTML =
-              `<strong>${days}</strong> days, <strong>${hours}</strong> hours, <strong>${minutes}</strong> minutes, <strong>${seconds}</strong> seconds since us ❤️`;
-      }
-    }
-
-    updateTimer();
-    setInterval(updateTimer, 1000);
+  <div class="footer">Made with love by Kuddu ❤️</div>
+</div>
 
 
-    const heartContainer = document.getElementById('heart-container');
-    const numHearts = 30;
+<script>
+/* TIMER */
+(function(){
+  const start=new Date("2024-01-07T00:00:00");
+  const el=document.getElementById("live-time-counter");
 
-    function createHeart() {
-        const heart = document.createElement('div');
-        heart.classList.add('heart');
-        heart.innerHTML = '❤️';
-        
-        const startX = Math.random() * 100 + 'vw';
-        heart.style.left = startX;
-        
-        const randomSize = Math.random() * 10 + 15;
-        heart.style.fontSize = randomSize + 'px';
+  function update(){
+    const now=new Date();
+    let diff=now-start;
 
-        heart.style.animationDelay = Math.random() * 5 + 's';
-        heart.style.animationDuration = Math.random() * 5 + 7 + 's';
+    const d=Math.floor(diff/86400000); diff-=d*86400000;
+    const h=Math.floor(diff/3600000); diff-=h*3600000;
+    const m=Math.floor(diff/60000); diff-=m*60000;
+    const s=Math.floor(diff/1000);
 
-        heartContainer.appendChild(heart);
+    el.textContent = `${d} days, ${h} hrs, ${m} mins, ${s} secs of us ❤️`;
+  }
+  update();
+  setInterval(update,1000);
+})();
 
-        heart.addEventListener('animationend', () => {
-            heart.remove();
-            setTimeout(createHeart, Math.random() * 1000);
-        });
-    }
+/* MEMORY BOX */
+const btn=document.getElementById("memoryBtn");
+const box=document.getElementById("memoryContent");
 
-    for (let i = 0; i < numHearts; i++) {
-        setTimeout(createHeart, Math.random() * 3000);
-    }
+btn.onclick=()=>{
+  const opening=!box.classList.contains("active");
+  if(opening){
+    confetti({particleCount:140,spread:90,origin:{y:0.6}});
+  }
+  box.classList.toggle("active");
+  btn.textContent=box.classList.contains("active")
+    ?"Close Memory Box 💖"
+    :"Open Our Memory Box 🎁";
+};
 
-  </script>
+/* SCROLL ARROW */
+window.addEventListener("scroll",()=>{
+  document.getElementById("scroll-arrow").style.opacity =
+    window.scrollY>40 ? "0" : "1";
+});
+document.getElementById("scroll-arrow").onclick=()=>{
+  window.scrollTo({top:window.innerHeight,behavior:"smooth"});
+};
+
+/* FLOATING HEARTS + SPARKLES */
+(function(){
+  function spawnHeart(){
+    const el=document.createElement("div");
+    el.className="floating-heart";
+    el.textContent=["❤️","💖","✨","🐧"][Math.floor(Math.random()*4)];
+    el.style.position="fixed";
+    el.style.left=(Math.random()*92)+"vw";
+    el.style.bottom="-10vh";
+    el.style.fontSize=(Math.random()*20+14)+"px";
+    el.style.opacity=(Math.random()*0.6+0.3);
+    el.style.animation=`floatUp ${Math.random()*4+5}s ease-in forwards`;
+    document.body.appendChild(el);
+    setTimeout(()=>el.remove(),8000);
+  }
+
+  function spawnSparkle(){
+    if(Math.random()<0.5)return;
+    const el=document.createElement("div");
+    el.className="floating-sparkle";
+    el.textContent="✨";
+    el.style.position="fixed";
+    el.style.left=(Math.random()*92)+"vw";
+    el.style.top=(Math.random()*92)+"vh";
+    el.style.fontSize=(Math.random()*12+8)+"px";
+    el.style.opacity=(Math.random()*0.6+0.3);
+    el.style.animation=`sparkleFloat ${Math.random()*3+4}s ease-in forwards`;
+    document.body.appendChild(el);
+    setTimeout(()=>el.remove(),7000);
+  }
+
+  setInterval(spawnHeart,300);
+  setInterval(spawnSparkle,500);
+
+  const style=document.createElement("style");
+  style.textContent=`
+@keyframes floatUp{
+  0%{opacity:0;transform:translateY(80px) scale(.4)}
+  20%{opacity:.9}
+  90%{opacity:.9}
+  100%{opacity:0;transform:translateY(-420px) scale(.1)}
+}
+@keyframes sparkleFloat{
+  0%{opacity:0;transform:translateY(40px) scale(.2)}
+  20%{opacity:1}
+  90%{opacity:1}
+  100%{opacity:0;transform:translateY(-260px) scale(.4)}
+}`;
+  document.head.appendChild(style);
+})();
+</script>
+
 </body>
-
 </html>
-
-
